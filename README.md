@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# 부산시 스마트 도시 차량 서비스 - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+부산시 스마트 도시 계획을 위한 차량 서비스 웹 애플리케이션의 프론트엔드입니다.
 
-Currently, two official plugins are available:
+## 📋 프로젝트 개요
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+차량을 활용한 3가지 주요 서비스를 제공합니다:
+1. **실시간 운전자 졸음 행동 탐지** - 차량 내부 카메라를 통한 졸음운전 탐지
+2. **체납자 차량 번호판 탐지** - 차량 외부 카메라를 통한 번호판 인식 및 국세청 알림
+3. **실종자 탐지** - 차량 외부 카메라를 통한 실종자 발견 및 경찰청 알림
 
-## React Compiler
+## 🎯 주요 기능
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 일반 사용자
+- 회원가입/로그인, 차량 등록/수정/삭제
+- 안전습관 점수 조회 및 주행별 상세 기록
 
-## Expanding the ESLint configuration
+### 부산시 관리자
+- 안전운전 관리 (PowerBI 대시보드)
+- 불법주정차 단속 관리 및 상습위반차량 조회
+- 실종자 관리 및 통계 시각화
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 시스템 관리자
+- 전체 사용자 관리 및 활동 로그 모니터링
+- 시스템 상태 대시보드
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 기술 스택
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **React** 19.2.0 + **TypeScript** 5.9.3
+- **Vite** 7.2.4 - 빌드 도구
+- **Material-UI** 5.14.20 - UI 컴포넌트
+- **Zustand** 4.4.7 - 상태 관리
+- **React Router DOM** 6.20.0 - 라우팅
+- **PowerBI Client** 2.23.1 - 데이터 시각화
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📁 프로젝트 구조
+
+```
+src/
+├── components/    # 공통 컴포넌트 (Card, ProtectedRoute, PowerBI 등)
+├── hooks/         # 커스텀 훅 (useAuth, useVehicle, usePowerBI)
+├── layouts/       # 레이아웃 (Admin, City, User, Auth)
+├── pages/         # 페이지 (admin, auth, city, user)
+├── router/        # 라우팅 설정
+├── store/         # Zustand 상태 관리 (auth, vehicle)
+├── types/         # TypeScript 타입 정의
+└── utils/         # 유틸리티 함수
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 시작하기
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# 의존성 설치
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 개발 서버 실행
+npm run dev
+
+# 프로덕션 빌드
+npm run build
 ```
+
+## 🔐 인증
+
+Mock 인증 시스템 사용:
+- **일반 사용자**: 아무 아이디/비밀번호로 로그인 가능
+- **부산시 관리자**: 인증 코드 `BUSAN2024` 필요
+- **시스템 관리자**: 인증 코드 `SYSTEM2024` 필요
+
+## 📊 PowerBI 통합
+
+안전운전, 불법주정차, 실종자 현황 대시보드를 PowerBI로 임베드하여 제공합니다.
+실제 연동을 위해서는 백엔드 API를 통해 Embed Token이 필요합니다.
+
+## 🔄 상태 관리
+
+- **authStore**: 사용자 인증 상태 (Zustand + LocalStorage persist)
+- **vehicleStore**: 차량 정보 및 주행 기록
+
+## 🎨 주요 특징
+
+- Material Design 기반 반응형 UI
+- 역할별 맞춤형 대시보드
+- PowerBI를 통한 데이터 시각화
+- TypeScript로 타입 안정성 확보
+
+---
+
+**마지막 업데이트**: 2025-11-25
