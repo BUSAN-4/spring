@@ -16,7 +16,6 @@ import {
   Select,
   MenuItem,
   Alert,
-  CircularProgress,
   Tabs,
   Tab,
   CardContent,
@@ -25,7 +24,6 @@ import { Search, Edit, LocalParking as LocalParkingIcon, DirectionsCar, CheckCir
 import CityLayout from '../../layouts/CityLayout';
 import Card from '../../components/common/Card';
 import PowerBIEmbedView from '../../components/common/powerbi/PowerBIEmbedView';
-import { usePowerBI } from '../../hooks/usePowerBI';
 
 interface Violation {
   id: string;

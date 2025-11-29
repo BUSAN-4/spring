@@ -226,7 +226,10 @@ export default function UserMyPage() {
                 label="차량 유형"
                 name="vehicleType"
                 value={currentVehicleData.vehicleType}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  const value = e.target.value as 'private' | 'taxi' | 'rental';
+                  setCurrentVehicleData({ ...currentVehicleData, vehicleType: value });
+                }}
               >
                 {Object.entries(VEHICLE_TYPES).map(([key, value]) => (
                   <MenuItem key={key} value={value}>

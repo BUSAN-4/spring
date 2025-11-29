@@ -1,4 +1,4 @@
-import { Card as MuiCard, CardContent, CardHeader, CardActions, Box, Typography } from '@mui/material';
+import { Card as MuiCard, CardContent, CardHeader, CardActions } from '@mui/material';
 import type { SxProps, Theme } from '@mui/material';
 
 interface CardProps {

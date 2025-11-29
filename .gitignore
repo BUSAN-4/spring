@@ -69,7 +69,7 @@ coverage
 # pnpm-lock.yaml
 
 # Docker
-.dockerignore
+# .dockerignore  # ❌ 제거하거나 주석 처리
 docker-compose.override.yml
 *.dockerfile.local
 

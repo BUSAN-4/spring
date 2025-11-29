@@ -9,7 +9,6 @@ import {
   Tabs,
   Tab,
   Avatar,
-  Divider,
 } from '@mui/material';
 import { useAuthStore } from '../store/authStore';
 
