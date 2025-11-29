@@ -23,7 +23,6 @@ import { Search, Edit, PersonSearch as PersonSearchIcon, CheckCircle, ErrorOutli
 import CityLayout from '../../layouts/CityLayout';
 import Card from '../../components/common/Card';
 import PowerBIEmbedView from '../../components/common/powerbi/PowerBIEmbedView';
-import { usePowerBI } from '../../hooks/usePowerBI';
 
 interface MissingPerson {
   id: string;
@@ -38,8 +37,12 @@ interface MissingPerson {
 
 const MISSING_PERSON_REPORT_ID = "missing-person-report-id";
 
+// Power BI 공개 임베드 URL (실종자 대시보드용 - 필요시 다른 URL로 변경)
+const MISSING_PERSON_REPORT_URL = "https://app.powerbi.com/view?r=eyJrIjoiYzcxMzcwNzktZmFjNy00NWU0LWJiMzgtYTg0YjYxNGViZWI5IiwidCI6Ijk1OWQ4N2E2LTU3YTMtNGMyNi05M2VkLTVmYzIwYWY2MzVlZCJ9";
+
 export default function CityDashboardMissingPerson() {
-  const { config: powerBIConfig, loading: powerBILoading, error: powerBIError } = usePowerBI(MISSING_PERSON_REPORT_ID);
+  // usePowerBI 훅 제거
+  // const { config: powerBIConfig, loading: powerBILoading, error: powerBIError } = usePowerBI(MISSING_PERSON_REPORT_ID);
 
   const [missingPersons, setMissingPersons] = useState<MissingPerson[]>([
     { id: '1', name: '김○○', age: 12, gender: '여', detectedLocation: '해운대구 우동', detectedDate: '2025-11-24', detectedTime: '15:30', status: 'confirmed' },
@@ -159,16 +162,10 @@ export default function CityDashboardMissingPerson() {
 
       <Card title="실종자 현황 대시보드" sx={{ mb: 4 }}>
         <CardContent>
-          {powerBILoading ? (
-            <Box display="flex" justifyContent="center" alignItems="center" sx={{ height: 400 }}>
-              <CircularProgress />
-              <Typography variant="h6" sx={{ ml: 2 }}>PowerBI 대시보드 로딩 중...</Typography>
-            </Box>
-          ) : powerBIError ? (
-            <Alert severity="error">PowerBI 대시보드를 불러오는 데 실패했습니다: {powerBIError.message}</Alert>
-          ) : (
-            <PowerBIEmbedView config={powerBIConfig} height="600px" />
-          )}
+          <PowerBIEmbedView 
+            reportUrl={MISSING_PERSON_REPORT_URL} 
+            height="600px" 
+          />
         </CardContent>
       </Card>
 
@@ -339,4 +336,5 @@ export default function CityDashboardMissingPerson() {
     </CityLayout>
   );
 }
+
 

@@ -39,8 +39,12 @@ interface Violation {
 
 const ILLEGAL_PARKING_REPORT_ID = "illegal-parking-report-id";
 
+// Power BI 공개 임베드 URL (불법주정차 대시보드용 - 필요시 다른 URL로 변경)
+const ILLEGAL_PARKING_REPORT_URL = "https://app.powerbi.com/view?r=eyJrIjoiYzcxMzcwNzktZmFjNy00NWU0LWJiMzgtYTg0YjYxNGViZWI5IiwidCI6Ijk1OWQ4N2E2LTU3YTMtNGMyNi05M2VkLTVmYzIwYWY2MzVlZCJ9";
+
 export default function CityDashboardIllegalParking() {
-  const { config: powerBIConfig, loading: powerBILoading, error: powerBIError } = usePowerBI(ILLEGAL_PARKING_REPORT_ID);
+  // usePowerBI 훅 제거
+  // const { config: powerBIConfig, loading: powerBILoading, error: powerBIError } = usePowerBI(ILLEGAL_PARKING_REPORT_ID);
 
   const [violations, setViolations] = useState<Violation[]>([
     { id: '1', plateNumber: '12가3456', location: '해운대구 우동', date: '2025-11-24', time: '14:30', count: 8, status: 'confirmed' },
@@ -167,16 +171,10 @@ export default function CityDashboardIllegalParking() {
           </Tabs>
         </Box>
         <CardContent>
-          {powerBILoading ? (
-            <Box display="flex" justifyContent="center" alignItems="center" sx={{ height: 400 }}>
-              <CircularProgress />
-              <Typography variant="h6" sx={{ ml: 2 }}>PowerBI 대시보드 로딩 중...</Typography>
-            </Box>
-          ) : powerBIError ? (
-            <Alert severity="error">PowerBI 대시보드를 불러오는 데 실패했습니다: {powerBIError.message}</Alert>
-          ) : (
-            <PowerBIEmbedView config={powerBIConfig} height="600px" />
-          )}
+          <PowerBIEmbedView 
+            reportUrl={ILLEGAL_PARKING_REPORT_URL} 
+            height="600px" 
+          />
         </CardContent>
       </Card>
 
@@ -331,4 +329,5 @@ export default function CityDashboardIllegalParking() {
     </CityLayout>
   );
 }
+
 

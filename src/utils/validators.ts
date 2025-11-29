@@ -18,3 +18,4 @@ export const validatePassword = (password: string): boolean => {
   return passwordRegex.test(password);
 };
 
+

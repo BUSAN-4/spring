@@ -1,8 +1,6 @@
 import {
   Box,
   Typography,
-  CircularProgress,
-  Alert,
   Tabs,
   Tab,
   CardContent,
@@ -10,13 +8,12 @@ import {
 import CityLayout from '../../layouts/CityLayout';
 import Card from '../../components/common/Card';
 import PowerBIEmbedView from '../../components/common/powerbi/PowerBIEmbedView';
-import { usePowerBI } from '../../hooks/usePowerBI';
 import { useState } from 'react';
 
-const SAFE_DRIVING_REPORT_ID = "safe-driving-report-id";
+// Power BI 공개 임베드 URL (웹에 게시)
+const POWER_BI_REPORT_URL = "https://app.powerbi.com/view?r=eyJrIjoiYzcxMzcwNzktZmFjNy00NWU0LWJiMzgtYTg0YjYxNGViZWI5IiwidCI6Ijk1OWQ4N2E2LTU3YTMtNGMyNi05M2VkLTVmYzIwYWY2MzVlZCJ9";
 
 export default function CityDashboardSafeDriving() {
-  const { config: powerBIConfig, loading: powerBILoading, error: powerBIError } = usePowerBI(SAFE_DRIVING_REPORT_ID);
   const [tabValue, setTabValue] = useState(0);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -103,19 +100,14 @@ export default function CityDashboardSafeDriving() {
           </Tabs>
         </Box>
         <CardContent>
-          {powerBILoading ? (
-            <Box display="flex" justifyContent="center" alignItems="center" sx={{ height: 400 }}>
-              <CircularProgress />
-              <Typography variant="h6" sx={{ ml: 2 }}>PowerBI 대시보드 로딩 중...</Typography>
-            </Box>
-          ) : powerBIError ? (
-            <Alert severity="error">PowerBI 대시보드를 불러오는 데 실패했습니다: {powerBIError.message}</Alert>
-          ) : (
-            <PowerBIEmbedView config={powerBIConfig} height="600px" />
-          )}
+          <PowerBIEmbedView 
+            reportUrl={POWER_BI_REPORT_URL} 
+            height="600px" 
+          />
         </CardContent>
       </Card>
     </CityLayout>
   );
 }
+
 

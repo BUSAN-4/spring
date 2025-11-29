@@ -3,13 +3,38 @@ import * as pbi from 'powerbi-client';
 import type { PowerBIConfig } from '../../../types/dashboard';
 
 interface PowerBIEmbedViewProps {
-  config: PowerBIConfig | null;
+  config?: PowerBIConfig | null;
+  reportUrl?: string; // URL 직접 사용 옵션 추가
   height?: string;
 }
 
-export default function PowerBIEmbedView({ config, height = '800px' }: PowerBIEmbedViewProps) {
+export default function PowerBIEmbedView({ 
+  config, 
+  reportUrl,
+  height = '800px' 
+}: PowerBIEmbedViewProps) {
   const embedContainerRef = useRef<HTMLDivElement>(null);
 
+  // URL이 제공되면 iframe으로 직접 표시 (백엔드 불필요)
+  if (reportUrl) {
+    return (
+      <iframe
+        src={reportUrl}
+        width="100%"
+        height={height}
+        frameBorder="0"
+        allowFullScreen
+        style={{
+          border: '1px solid #e0e0e0',
+          borderRadius: '4px',
+          display: 'block',
+        }}
+        title="Power BI Report"
+      />
+    );
+  }
+
+  // 기존 방식: config를 사용한 공식 임베드 (백엔드 필요)
   useEffect(() => {
     if (!embedContainerRef.current || !config) return;
 
@@ -60,4 +85,5 @@ export default function PowerBIEmbedView({ config, height = '800px' }: PowerBIEm
     />
   );
 }
+
 
