@@ -11,8 +11,8 @@ import PowerBIEmbedView from '../../components/common/powerbi/PowerBIEmbedView';
 import { useState } from 'react';
 
 // Power BI 공개 임베드 URL (웹에 게시)
-const POWER_BI_REPORT_URL = "https://app.powerbi.com/view?r=eyJrIjoiYzcxMzcwNzktZmFjNy00NWU0LWJiMzgtYTg0YjYxNGViZWI5IiwidCI6Ijk1OWQ4N2E2LTU3YTMtNGMyNi05M2VkLTVmYzIwYWY2MzVlZCJ9";
-
+// src/pages/city/CityDashboardSafeDriving.tsx
+const POWER_BI_REPORT_URL = import.meta.env.VITE_POWER_BI_SAFE_DRIVING_URL || "";
 export default function CityDashboardSafeDriving() {
   const [tabValue, setTabValue] = useState(0);
 

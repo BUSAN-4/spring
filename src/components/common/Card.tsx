@@ -1,12 +1,14 @@
 import { Card as MuiCard, CardContent, CardHeader, CardActions, Box, Typography } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
 
 interface CardProps {
   title?: string;
   children: React.ReactNode;
   actions?: React.ReactNode;
+  sx?: SxProps<Theme>;
 }
 
-export default function Card({ title, children, actions }: CardProps) {
+export default function Card({ title, children, actions, sx }: CardProps) {
   return (
     <MuiCard
       sx={{
@@ -19,6 +21,7 @@ export default function Card({ title, children, actions }: CardProps) {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        ...sx, // sx prop 병합
       }}
     >
       {title && (

@@ -16,7 +16,6 @@ import {
   Select,
   MenuItem,
   Alert,
-  CircularProgress,
   CardContent,
 } from '@mui/material';
 import { Search, Edit, PersonSearch as PersonSearchIcon, CheckCircle, ErrorOutline } from '@mui/icons-material';
@@ -35,10 +34,8 @@ interface MissingPerson {
   status: 'confirmed' | 'false-positive' | 'pending';
 }
 
-const MISSING_PERSON_REPORT_ID = "missing-person-report-id";
-
-// Power BI 공개 임베드 URL (실종자 대시보드용 - 필요시 다른 URL로 변경)
-const MISSING_PERSON_REPORT_URL = "https://app.powerbi.com/view?r=eyJrIjoiYzcxMzcwNzktZmFjNy00NWU0LWJiMzgtYTg0YjYxNGViZWI5IiwidCI6Ijk1OWQ4N2E2LTU3YTMtNGMyNi05M2VkLTVmYzIwYWY2MzVlZCJ9";
+// Power BI 공개 임베드 URL (실종자 대시보드용)
+const MISSING_PERSON_REPORT_URL = import.meta.env.VITE_POWER_BI_MISSING_PERSON_URL || "";
 
 export default function CityDashboardMissingPerson() {
   // usePowerBI 훅 제거

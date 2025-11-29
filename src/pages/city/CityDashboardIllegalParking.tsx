@@ -37,10 +37,8 @@ interface Violation {
   status: 'confirmed' | 'pending';
 }
 
-const ILLEGAL_PARKING_REPORT_ID = "illegal-parking-report-id";
-
-// Power BI 공개 임베드 URL (불법주정차 대시보드용 - 필요시 다른 URL로 변경)
-const ILLEGAL_PARKING_REPORT_URL = "https://app.powerbi.com/view?r=eyJrIjoiYzcxMzcwNzktZmFjNy00NWU0LWJiMzgtYTg0YjYxNGViZWI5IiwidCI6Ijk1OWQ4N2E2LTU3YTMtNGMyNi05M2VkLTVmYzIwYWY2MzVlZCJ9";
+// Power BI 공개 임베드 URL (불법주정차 대시보드용)
+const ILLEGAL_PARKING_REPORT_URL = import.meta.env.VITE_POWER_BI_ILLEGAL_PARKING_URL || "";
 
 export default function CityDashboardIllegalParking() {
   // usePowerBI 훅 제거
@@ -163,20 +161,22 @@ export default function CityDashboardIllegalParking() {
         </Box>
       </Box>
 
-      <Card title="불법주정차 현황 대시보드" sx={{ mb: 4 }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
-          <Tabs value={0} onChange={() => {}} aria-label="PowerBI dashboard tabs">
-            <Tab label="현황 대시보드" />
-            <Tab label="다발 구역" />
-          </Tabs>
-        </Box>
-        <CardContent>
-          <PowerBIEmbedView 
-            reportUrl={ILLEGAL_PARKING_REPORT_URL} 
-            height="600px" 
-          />
-        </CardContent>
-      </Card>
+      <Box sx={{ mb: 4 }}>
+        <Card title="불법주정차 현황 대시보드">
+          <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
+            <Tabs value={0} onChange={() => {}} aria-label="PowerBI dashboard tabs">
+              <Tab label="현황 대시보드" />
+              <Tab label="다발 구역" />
+            </Tabs>
+          </Box>
+          <CardContent>
+            <PowerBIEmbedView 
+              reportUrl={ILLEGAL_PARKING_REPORT_URL} 
+              height="600px" 
+            />
+          </CardContent>
+        </Card>
+      </Box>
 
       <Card title="위반 정보 관리">
         <CardContent>
