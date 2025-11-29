@@ -7,18 +7,102 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.pnp
+.pnp.js
+
+# Build outputs
 dist
 dist-ssr
+build
 *.local
+
+# Environment variables (민감한 정보 포함)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+.envrc
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
+*.swp
+*.swo
+*~
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Testing
+coverage
+.nyc_output
+*.lcov
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+.parcel-cache
+.turbo
+
+# Package manager locks (선택사항 - 팀 정책에 따라)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+*.dockerfile.local
+
+# AWS / Cloud
+.aws/
+.aws-sam/
+serverless.yml
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+
+# Secrets and credentials
+secrets/
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+credentials.json
+config.json
+
+# Power BI / API Keys (환경 변수로 관리 권장)
+# Power BI URL은 코드에서 환경 변수로 분리하는 것을 권장합니다
+
+# CI/CD
+.github/workflows/*.secret.yml
+.gitlab-ci.yml.local
+
+# Misc
+*.bak
+*.backup
+*.old
